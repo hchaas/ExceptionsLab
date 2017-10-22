@@ -21,9 +21,16 @@ public class Challenge1 {
     // this method responsible for output
     public static void main(String[] args) {
         Challenge1 app = new Challenge1();
+        String lastName = "";
         
         String fullName = JOptionPane.showInputDialog("Enter full name (use Format: first last):");
-        String lastName = app.extractLastName(fullName);
+        try {
+            lastName = app.extractLastName(fullName);
+        }
+        catch (IllegalArgumentException iae){
+            System.out.println(iae.getMessage());
+        }
+        
         String msg = "Your last name is: " + lastName;
         JOptionPane.showMessageDialog(null, msg);
     }
@@ -32,12 +39,18 @@ public class Challenge1 {
     // Use exception handling to prevent a crash in the event that fullName
     // is null or empty. Throw the exception to the calling method. and handle
     // it there.
-    public String extractLastName(String fullName) {
-        String lastName = null;
+    public String extractLastName(String fullName) throws IllegalArgumentException {
+        String lastName;
+        if (fullName == null || fullName.isEmpty() || !fullName.contains(" ")){
+            throw new IllegalArgumentException("Full name cannot be blank, and must be two words.");
+        }
         
-        // Your code goes here.
+        String[] stringArray = fullName.split(" ");
+        lastName = stringArray[stringArray.length-1];
+        
         
         return lastName;
+
     }
 
 }
