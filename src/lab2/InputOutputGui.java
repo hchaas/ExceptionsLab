@@ -21,13 +21,14 @@ public class InputOutputGui {
         String lastName = "";
         try {
             lastName = nameService.extractLastName(fullName);
+            String msg = "Your last name is: " + lastName;
+            JOptionPane.showMessageDialog(null, msg);
         }
         catch (IllegalArgumentException iae){
             System.out.println(iae.getMessage());
         }
  
-        String msg = "Your last name is: " + lastName;
-        JOptionPane.showMessageDialog(null, msg);
+        
         
         
     }
