@@ -26,13 +26,12 @@ public class Challenge1 {
         String fullName = JOptionPane.showInputDialog("Enter full name (use Format: first last):");
         try {
             lastName = app.extractLastName(fullName);
+            String msg = "Your last name is: " + lastName;
+            JOptionPane.showMessageDialog(null, msg);
         }
         catch (IllegalArgumentException iae){
             System.out.println(iae.getMessage());
         }
-        
-        String msg = "Your last name is: " + lastName;
-        JOptionPane.showMessageDialog(null, msg);
     }
     
     // write the code to extract the lastName from the fullName
@@ -41,13 +40,16 @@ public class Challenge1 {
     // it there.
     public String extractLastName(String fullName) throws IllegalArgumentException {
         String lastName;
-        if (fullName == null || fullName.isEmpty() || !fullName.contains(" ")){
+        if (fullName == null || fullName.isEmpty()){
             throw new IllegalArgumentException("Full name cannot be blank, and must be two words.");
         }
         
         String[] stringArray = fullName.split(" ");
-        lastName = stringArray[stringArray.length-1];
+        if(stringArray.length == 1 || fullName.contains(",")){
+            throw new IllegalArgumentException("Must enter both a first name and last name.");
+        }
         
+        lastName = stringArray[stringArray.length-1];
         
         return lastName;
 
