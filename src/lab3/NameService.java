@@ -18,16 +18,16 @@ public class NameService {
      * @throws YourCustomExceptionName if fullName is null or empty or has fewer
      * than two parts
      */
-    public String extractLastName(String fullName) {
+    public String extractLastName(String fullName) throws IllegalArgumentException {
 
         String lastName;
         if (fullName == null || fullName.isEmpty()) {
-            throw new EmptyEntryException("Full name cannot be blank, and must be two words.");
+            throw new EmptyEntryException();
         }
 
         String[] stringArray = fullName.split(" ");
         if (stringArray.length == 1 || fullName.contains(",")) {
-            throw new InvalidNameEntryException("Must enter both a first name and last name.");
+            throw new InvalidNameEntryException();
         }
 
         lastName = stringArray[stringArray.length - 1];
